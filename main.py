@@ -85,7 +85,6 @@ class preprocWindow(QtWidgets.QMainWindow):
             fig, ax = plt.subplots(1, 1)
             fig.canvas.set_window_title('Series display')
             X_tran = np.transpose(img_array, (1,2,0))
-            print(X_tran.shape)
             color_map='gray'
             title = 'Axial slices of preprocessed portal vein phase'
             self.tracker = IndexTracker(ax, X_tran, color_map, title)
@@ -111,7 +110,6 @@ class preprocWindow(QtWidgets.QMainWindow):
                 fig, ax = plt.subplots(1, 1)
                 fig.canvas.set_window_title('Series display')
                 X_tran = np.transpose(img_array, (1,2,0))
-                print(X_tran.shape)
                 color_map='gray'
                 title = 'Axial slices of preprocessed native phase'
                 self.tracker = IndexTracker(ax, X_tran, color_map, title)
@@ -386,12 +384,10 @@ class liverSegmTab(QtWidgets.QWidget):
 class kidneysSegmTab(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(kidneysSegmTab, self).__init__(parent)
-        # self.lbl = QtWidgets.QLabel(self)
-        # self.lbl.setText("For thresholds choose values which surround last peak.")
-        # self.lbl.move(810, 530)
         # Right kidney (left on pictures)
         self.lbl = QtWidgets.QLabel(self)
-        self.lbl.setText('Right kidney (left on pictures)')
+        self.lbl.setText('Right kidney\n(left on pictures)')
+        self.lbl.setFont(QtGui.QFont('Times New Roman', 12, weight=QtGui.QFont.Bold))
         self.lbl.move(70, 20)
         
         self.lbl_xl = QtWidgets.QLabel(self)
@@ -470,8 +466,9 @@ class kidneysSegmTab(QtWidgets.QWidget):
         
         # Left kidney (right on pictures)
         self.lbl2 = QtWidgets.QLabel(self)
-        self.lbl2.setText('Left kidney (right on pictures)')
-        self.lbl2.move(1230, 20)
+        self.lbl2.setText('Left kidney\n(right on pictures)')
+        self.lbl2.setFont(QtGui.QFont('Times New Roman', 12, weight=QtGui.QFont.Bold))
+        self.lbl2.move(1240, 20)
         
         self.lbl_xl2 = QtWidgets.QLabel(self)
         self.lbl_xl2.setText('left border (x-axis)')
@@ -547,6 +544,10 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.ut2.setText("0")
         self.ut2.move(1800, 650)
         
+        # self.lbl = QtWidgets.QLabel(self)
+        # self.lbl.setText("For thresholds choose values which surround last peak.")
+        # self.lbl.move(810, 530)
+        
         # Whole series representation
         sc2 = MplCanvas(self, width=5, height=4, dpi=100)
         img = sitk.ReadImage(work_dir + "/data/portal_vein_phase_preprocessed.mha")
@@ -570,7 +571,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         # Histogram of right kidney
         self.sc = MplCanvas(self, width=5, height=4, dpi=100)
         self.sc.axes.set(xlabel='', ylabel='',
-                title='Right kidney volume histogram')
+                title='Right kidney region histogram')
         self.toolbar = NavigationToolbar(self.sc, self)
         self.fixwidget = QtWidgets.QWidget(self)
         self.layout  = QtWidgets.QGridLayout()
@@ -585,7 +586,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
          # Histogram of left kidney
         self.sc3 = MplCanvas(self, width=5, height=4, dpi=100)
         self.sc3.axes.set(xlabel='', ylabel='',
-                title='Left kidney volume histogram')
+                title='Left kidney region histogram')
         toolbar3 = NavigationToolbar(self.sc3, self)
         self.fixwidget3 = QtWidgets.QWidget(self)
         self.layout3  = QtWidgets.QGridLayout()
@@ -614,8 +615,8 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.pushButton_segm2.move(1425, 900)
         
         self.pushButton_next = QtWidgets.QPushButton('next (Segmentation of additional objects)', self)
-        self.pushButton_next.resize(210, 40)
-        self.pushButton_next.move(1700, 950)
+        self.pushButton_next.resize(215, 40)
+        self.pushButton_next.move(1695, 950)
 
 
 class stoneSegmTab(QtWidgets.QWidget):
@@ -880,12 +881,11 @@ class segmWindow(QtWidgets.QMainWindow):
                     self.ToolTab.sc.axes.figure.canvas.axes.clear()
                     self.ToolTab.sc.axes.plot(hist)
                     self.ToolTab.sc.axes.set(xlabel='', ylabel='',
-                    title='Right kidney volume histogram')
+                    title='Right kidney region histogram')
                     self.ToolTab.sc.axes.figure.canvas.draw()
                     fig, ax = plt.subplots(1, 1)
                     fig.canvas.set_window_title('Figure')
                     X_tran = np.transpose(box, (1,2,0))
-                    print(X_tran.shape)
                     color_map='gray'
                     title = 'Right kidney region (inside selected borders)'
                     self.tracker = IndexTracker(ax, X_tran, color_map, title)
@@ -906,12 +906,11 @@ class segmWindow(QtWidgets.QMainWindow):
                     self.ToolTab.sc3.axes.figure.canvas.axes.clear()
                     self.ToolTab.sc3.axes.plot(hist)
                     self.ToolTab.sc3.axes.set(xlabel='', ylabel='',
-                    title='Left kidney volume histogram')
+                    title='Left kidney region histogram')
                     self.ToolTab.sc3.axes.figure.canvas.draw()
                     fig, ax = plt.subplots(1, 1)
                     fig.canvas.set_window_title('Figure')
                     X_tran = np.transpose(box, (1,2,0))
-                    print(X_tran.shape)
                     color_map='gray'
                     title = 'Left kidney region (inside selected borders)'
                     self.tracker2 = IndexTracker(ax, X_tran, color_map, title)
@@ -1046,8 +1045,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
            
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Three-dimensional segmentation and visualization of abdominal "
-                                             "computed tomography scans"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "3D Gastro CT Tool"))
         self.toolButton_read.setText(_translate("MainWindow", "Show\n"
                                                 "Data"))
         self.toolButton_preproc.setText(_translate("MainWindow", "Data\n"
@@ -1071,7 +1069,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             fig, ax = plt.subplots(1, 1)
             fig.canvas.set_window_title('Series display')
             X_tran = np.transpose(img_array, (1,2,0))
-            print(X_tran.shape)
             color_map='gray'
             title = 'Axial slices'
             self.tracker = IndexTracker(ax, X_tran, color_map, title)
