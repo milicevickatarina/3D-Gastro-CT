@@ -1,2 +1,2 @@
 # 3D_Gastro_CT
-Three-dimensional segmentation and visualization of abdominal computed tomography scans tool
+Tool for three-dimensional segmentation and visualization of abdominal computed tomography scans
