@@ -759,9 +759,9 @@ class segmWindow(QtWidgets.QMainWindow):
             popup_message(self, "Parameters must be integers!")
 
     def start_bones_segm(self):
-        self.Window = bonesSegmTab(self)
+        self.ToolTab = bonesSegmTab(self)
         self.setWindowTitle("Segmentation: Bones")
-        self.setCentralWidget(self.Window)
+        self.setCentralWidget(self.ToolTab)
         
         self.Window.pushButton_segm.clicked.connect(self.bones_segm_starter)
         self.Window.pushButton_next.clicked.connect(self.start_liver_segm)
@@ -1048,11 +1048,16 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "3D Gastro CT Tool"))
         self.toolButton_read.setText(_translate("MainWindow", "Show\n"
                                                 "Data"))
+        self.toolButton_read.setFont(QtGui.QFont('Times', 10))
         self.toolButton_preproc.setText(_translate("MainWindow", "Data\n"
                                                    "Preprocessing"))
+        self.toolButton_preproc.setFont(QtGui.QFont('Times', 9))
         self.toolButton_chooseWorkDir.setText(_translate("MainWindow", "Choose Work\nDirectory"))
+        self.toolButton_chooseWorkDir.setFont(QtGui.QFont('Times', 9))
         self.toolButton_segm.setText(_translate("MainWindow", "Segmentation"))
+        self.toolButton_segm.setFont(QtGui.QFont('Times', 10))
         self.toolButton_render.setText(_translate("MainWindow", "3D View of\nSegmented Data"))
+        self.toolButton_render.setFont(QtGui.QFont('Times', 10))
 
     def open_url(self):
         print("Opening")
