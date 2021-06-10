@@ -1023,6 +1023,13 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.toolButton_render.setObjectName("toolButton_render")
         self.toolButton_render.clicked.connect(self.start_render)
         
+        self.toolButton_export = QtWidgets.QToolButton(self.centralwidget)
+        self.toolButton_export.setGeometry(QtCore.QRect(501, 0, 101, 61))
+        self.toolButton_export.setStyleSheet('QToolButton {background-color: lightgrey; color: #35322f;}')
+        self.toolButton_export.setCheckable(False)
+        self.toolButton_export.setObjectName("toolButton_render")
+        self.toolButton_export.clicked.connect(self.export_images)
+        
         MainWindow.setCentralWidget(self.centralwidget)
         
         # button_action = QtWidgets.QAction(QtGui.QIcon("icon.png"), "&Your button", self)
@@ -1051,17 +1058,20 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.toolButton_read.setFont(QtGui.QFont('Times', 10))
         self.toolButton_preproc.setText(_translate("MainWindow", "Data\n"
                                                    "Preprocessing"))
-        self.toolButton_preproc.setFont(QtGui.QFont('Times', 9))
+        self.toolButton_preproc.setFont(QtGui.QFont('Times', 10))
         self.toolButton_chooseWorkDir.setText(_translate("MainWindow", "Choose Work\nDirectory"))
-        self.toolButton_chooseWorkDir.setFont(QtGui.QFont('Times', 9))
+        self.toolButton_chooseWorkDir.setFont(QtGui.QFont('Times', 10))
         self.toolButton_segm.setText(_translate("MainWindow", "Segmentation"))
         self.toolButton_segm.setFont(QtGui.QFont('Times', 10))
         self.toolButton_render.setText(_translate("MainWindow", "3D View of\nSegmented Data"))
         self.toolButton_render.setFont(QtGui.QFont('Times', 10))
+        self.toolButton_export.setText(_translate("MainWindow", "Export\nImages"))
+        self.toolButton_export.setFont(QtGui.QFont('Times', 10))
+
 
     def open_url(self):
         print("Opening")
-        url = QtCore.QUrl('https://github.com/')
+        url = QtCore.QUrl('https://github.com/milicevickatarina/3D-Gastro-CT')
         if not QtGui.QDesktopServices.openUrl(url):
             QtGui.QMessageBox.warning(self, 'Open Url', 'Could not open url')
         
@@ -1113,7 +1123,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         if work_dir!="":
             if os.path.exists(work_dir + "/segmentation results"):
                 import whole_segm
-                MainWindow.statusBar().showMessage('Rendering...')
+                MainWindow.statusBar().showMessage('Rendering... Please wait.')
                 whole_segm.main(work_dir)
                 import rendering
                 rendering.main(work_dir + "/segmentation results/whole_segmentation.mhd")
@@ -1122,7 +1132,20 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 popup_message(self, "There is no segmented data!")
         else:
             popup_message(self, "You have to choose work directory!")
-                  
+            
+    def export_images(self):
+        if work_dir!="":
+            if os.path.exists(work_dir + "/segmentation results"):
+                import export_images
+                MainWindow.statusBar().showMessage('Exporting... Please wait.')
+                export_images.main(work_dir + "/segmentation results/whole_segmentation.mhd", work_dir)
+                MainWindow.statusBar().showMessage('Rendering results are saved to .stl and .jpg files. You can change CT series and repeat the whole'
+                                                   ' algorithm on different data.')
+            else:
+                popup_message(self, "There is no segmented data!")
+        else:
+            popup_message(self, "You have to choose work directory!")
+             
     def closeEvent(self, event):
         self.QApplication.quit()
 

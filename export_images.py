@@ -1,28 +1,33 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Apr 21 12:29:28 2021
+Created on Thu Jun 10 17:28:56 2021
 
-@author: Katarina Milicevic, School of Electrical Engineering
-
-Rendering of segmented data
+@author: Kaca
 """
 import vtk
+import os
 
-def main(fileName):
+def main(fileName, main_dir):
+                                                
+    exp_dir = os.path.join(main_dir, "export")
+    if not os.path.exists(exp_dir):
+        os.makedirs(exp_dir)
     
     colors = vtk.vtkNamedColors()
 
     organsMap = CreateOrgansMap()
     colorLut = CreateColorLut()
 
-    # Setup render window, renderer, and interactor
+    # Setup render window, renderer, and interactor.
     renderer = vtk.vtkRenderer()
     renderWindow = vtk.vtkRenderWindow()
     renderWindow.AddRenderer(renderer)
     renderWindowInteractor = vtk.vtkRenderWindowInteractor()
     renderWindowInteractor.SetRenderWindow(renderWindow)
+    
+    appendPolydata = vtk.vtkAppendPolyData() 
 
-    # Order of organ selection
+    # Use this to ensure that the organs are selected in this order.
     organs = [
     'heart',
     'bones',
@@ -32,11 +37,19 @@ def main(fileName):
 ]
 
     for i in range(0, len(organs)):
-        actor = CreateOrganActor(fileName, organsMap[organs[i]])
+        actor, normals = CreateOrganActor(fileName, organsMap[organs[i]])
         actor.GetProperty().SetDiffuseColor(colorLut.GetTableValue(organsMap[organs[i]])[:3])
         actor.GetProperty().SetSpecular(.5)
         actor.GetProperty().SetSpecularPower(10)
         renderer.AddActor(actor)
+        # Collect data for stl
+        appendPolydata.AddInputConnection(normals.GetOutputPort())
+
+    # Save to stl
+    stlWriter = vtk.vtkSTLWriter()
+    stlWriter.SetInputConnection(appendPolydata.GetOutputPort())
+    stlWriter.SetFileName(exp_dir + "/Test_jun.stl")
+    stlWriter.Write()
 
     # renderer.GetActiveCamera().SetViewUp(0, 0, 1)
     # renderer.GetActiveCamera().SetPosition(0, 1, 0)
@@ -50,10 +63,32 @@ def main(fileName):
 
     renderWindow.SetSize(800, 800)
     renderWindow.Render()
-    renderWindow.SetWindowName('Rendered Data')
-    renderWindow.GlobalWarningDisplayOff()
 
-    renderWindowInteractor.Start()
+    # Save first window view to jpg
+    vtk_win_im = vtk.vtkWindowToImageFilter()
+    vtk_win_im.SetInput(renderWindow)
+    vtk_win_im.Update()
+    
+    vtk_image = vtk_win_im.GetOutput()
+    
+    writer = vtk.vtkJPEGWriter()
+    writer.SetInputData(vtk_image)
+    writer.SetFileName(exp_dir + "/pacijent1.jpg")
+    writer.Write()
+    
+    # renderWindowInteractor.Start()
+
+
+def get_program_parameters():
+    import argparse
+    description = 'Kidneys with some other abdominal organs'
+    epilogue = '''
+    '''
+    parser = argparse.ArgumentParser(description=description, epilog=epilogue,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('filename', help='organs.mhd.')
+    args = parser.parse_args()
+    return args.filename
 
 
 def CreateColorLut():
@@ -138,7 +173,7 @@ def CreateOrganActor(fileName, organ):
     actor = vtk.vtkActor()
     actor.SetMapper(mapper)
 
-    return actor
+    return actor, normals
 
 
 if __name__ == '__main__':
