@@ -38,14 +38,10 @@ def main(fileName):
         actor.GetProperty().SetSpecularPower(10)
         renderer.AddActor(actor)
 
-    # renderer.GetActiveCamera().SetViewUp(0, 0, 1)
-    # renderer.GetActiveCamera().SetPosition(0, 1, 0)
 
-    # renderer.GetActiveCamera().Azimuth(210)
     renderer.GetActiveCamera().Elevation(-90)
     renderer.ResetCamera()
     renderer.ResetCameraClippingRange()
-    # renderer.GetActiveCamera().Dolly(1.5)
     renderer.SetBackground(colors.GetColor3d("white"))
 
     renderWindow.SetSize(800, 800)

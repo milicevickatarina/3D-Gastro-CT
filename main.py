@@ -129,7 +129,7 @@ class preprocWindow(QtWidgets.QMainWindow):
         if os.path.exists(work_dir + "/data/portal_vein_phase_preprocessed.mha") & os.path.exists(work_dir + "/data/native_phase_preprocessed.mha"):
             MainWindow.statusBar().showMessage('You can now proceed to Segmentation.')
         else:
-            MainWindow.statusBar().showMessage('Before Segmentation, you have to finish Data Processing.')
+            MainWindow.statusBar().showMessage('Before Segmentation, you have to finish Data Preprocessing.')
                 
 class heartSegmTab(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -763,8 +763,8 @@ class segmWindow(QtWidgets.QMainWindow):
         self.setWindowTitle("Segmentation: Bones")
         self.setCentralWidget(self.ToolTab)
         
-        self.Window.pushButton_segm.clicked.connect(self.bones_segm_starter)
-        self.Window.pushButton_next.clicked.connect(self.start_liver_segm)
+        self.ToolTab.pushButton_segm.clicked.connect(self.bones_segm_starter)
+        self.ToolTab.pushButton_next.clicked.connect(self.start_liver_segm)
         
         self.statusBar.showMessage('Choose appropriate parameters to perform segmentation of bones.')
         
@@ -773,8 +773,8 @@ class segmWindow(QtWidgets.QMainWindow):
     def bones_segm_starter(self):
         import bones_segm
         try:
-            a = int(self.Window.lt.text())
-            b = int(self.Window.ut.text())
+            a = int(self.ToolTab.lt.text())
+            b = int(self.ToolTab.ut.text())
             self.statusBar.showMessage('Segmentation of bones has started. Please wait...')
             bones_segm.main(work_dir, a, b) 
             self.statusBar.showMessage('Segmentation of bones is done. You can now proceed to segmentation of liver and spleen. '
@@ -784,7 +784,9 @@ class segmWindow(QtWidgets.QMainWindow):
             popup_message(self, "Parameters must be integers!")
        
     def start_liver_segm(self):
+        print("1")
         self.ToolTab = liverSegmTab(self)
+        print("2")
         self.setWindowTitle("Segmentation: Liver and spleen")
         self.setCentralWidget(self.ToolTab)
         
@@ -1033,22 +1035,19 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         MainWindow.setCentralWidget(self.centralwidget)
         
         # button_action = QtWidgets.QAction(QtGui.QIcon("icon.png"), "&Your button", self)
-        button_action = QtWidgets.QAction("&GitHub", self) # Drugacije
+        button_action = QtWidgets.QAction("&Open project on GitHub", self)
         button_action.setStatusTip("Enter GitHub page of the program")
         button_action.triggered.connect(self.open_url)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 500, 800, 21))
-        # self.menubar.setStyleSheet('QMenuBar {background-color: lightgrey; color: #35322f;}')
-        # self.menubar.setStyleSheet('QMenuBar::item {background-color: lightgrey; color: #35322f;}')
         self.menubar.setObjectName("menubar")
-        self.filemenu = self.menubar.addMenu("&Help")
-        # self.filemenu.setStyleSheet('QMenu {background-color: lightgrey; color: #35322f;}')
+        self.filemenu = self.menubar.addMenu("&GitHub")
         self.filemenu.addAction(button_action)
         MainWindow.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        MainWindow.statusBar().showMessage('This is main menu of the program. Before Data Preprocessing and Segmentation choose work directory.')
+        MainWindow.statusBar().showMessage('This is main menu of the program. Before Data Preprocessing and Segmentation, choose work directory.')
            
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -1115,7 +1114,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
                 MainWindow.statusBar().showMessage('Segmentation...')
                 self.w.show()
             else:
-                popup_message(self, "Before Segmentation, you have to finish Data Processing.")
+                popup_message(self, "Before Segmentation, you have to finish Data Preprocessing.")
         else:
             popup_message(self, "You have to choose work directory!")
         

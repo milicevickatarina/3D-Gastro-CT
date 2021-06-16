@@ -55,5 +55,5 @@ def main(main_dir):
     
     # Image saving
     whole_segm_sitk = sitk.GetImageFromArray(whole_segm_mirror)
-    whole_segm_sitk.SetSpacing(heart_sitk.GetSpacing())
+    whole_segm_sitk.SetSpacing(img.GetSpacing())
     sitk.WriteImage(whole_segm_sitk, main_dir + "/segmentation results/whole_segmentation.mhd")

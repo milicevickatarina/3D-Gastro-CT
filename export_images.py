@@ -2,13 +2,16 @@
 """
 Created on Thu Jun 10 17:28:56 2021
 
-@author: Kaca
+@author: Katarina Milicevic, School of Electrical Engineering
+
+Exporting rendered data to .jpg and .stl file
 """
 import vtk
 import os
+from datetime import datetime
 
 def main(fileName, main_dir):
-                                                
+    # Creating export directory                                          
     exp_dir = os.path.join(main_dir, "export")
     if not os.path.exists(exp_dir):
         os.makedirs(exp_dir)
@@ -48,35 +51,27 @@ def main(fileName, main_dir):
     # Save to stl
     stlWriter = vtk.vtkSTLWriter()
     stlWriter.SetInputConnection(appendPolydata.GetOutputPort())
-    stlWriter.SetFileName(exp_dir + "/Test_jun.stl")
+    stlWriter.SetFileName(generate_file_name(exp_dir,'.stl'))
     stlWriter.Write()
 
-    # renderer.GetActiveCamera().SetViewUp(0, 0, 1)
-    # renderer.GetActiveCamera().SetPosition(0, 1, 0)
-
-    # renderer.GetActiveCamera().Azimuth(210)
     renderer.GetActiveCamera().Elevation(-90)
     renderer.ResetCamera()
     renderer.ResetCameraClippingRange()
-    # renderer.GetActiveCamera().Dolly(1.5)
     renderer.SetBackground(colors.GetColor3d("white"))
 
     renderWindow.SetSize(800, 800)
+    renderWindow.OffScreenRenderingOn()
     renderWindow.Render()
 
     # Save first window view to jpg
     vtk_win_im = vtk.vtkWindowToImageFilter()
     vtk_win_im.SetInput(renderWindow)
     vtk_win_im.Update()
-    
     vtk_image = vtk_win_im.GetOutput()
-    
     writer = vtk.vtkJPEGWriter()
     writer.SetInputData(vtk_image)
-    writer.SetFileName(exp_dir + "/pacijent1.jpg")
+    writer.SetFileName(generate_file_name(exp_dir,'.jpg'))
     writer.Write()
-    
-    # renderWindowInteractor.Start()
 
 
 def get_program_parameters():
@@ -175,6 +170,13 @@ def CreateOrganActor(fileName, organ):
 
     return actor, normals
 
+def generate_file_name(dir_path, extension):
+    n = datetime.now().strftime("%Y%m%d-%I%M%S")
+    return dir_path + '/' + n + extension
+    
+def stl_file_name():
+    n = datetime.now().strftime("%Y%m%d-%I%M%S")
+    return '/'+n+".stl"
 
 if __name__ == '__main__':
     main()
