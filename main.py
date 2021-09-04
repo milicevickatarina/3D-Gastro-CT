@@ -3,6 +3,8 @@
 Created on Sun May 23 11:29:58 2021
 
 @author: Katarina Milicevic, School of Electrical Engineering
+
+Main (Graphical user interface code)
 """
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -145,7 +147,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.xl = QtWidgets.QLineEdit(self)
         self.xl.setMaxLength(3)
         self.xl.setFixedWidth(50)
-        self.xl.setText("0")
+        self.xl.setPlaceholderText("0")
         self.xl.move(150, 380)
         
         self.lbl_xr = QtWidgets.QLabel(self)
@@ -154,7 +156,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.xr = QtWidgets.QLineEdit(self)
         self.xr.setMaxLength(3)
         self.xr.setFixedWidth(50)
-        self.xr.setText("0")
+        self.xr.setPlaceholderText("0")
         self.xr.move(810, 380)
         
         self.lbl_yt = QtWidgets.QLabel(self)
@@ -163,7 +165,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.yt = QtWidgets.QLineEdit(self)
         self.yt.setMaxLength(3)
         self.yt.setFixedWidth(50)
-        self.yt.setText("0")
+        self.yt.setPlaceholderText("0")
         self.yt.move(475, 100)
         
         self.lbl_yb = QtWidgets.QLabel(self)
@@ -172,7 +174,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.yb = QtWidgets.QLineEdit(self)
         self.yb.setMaxLength(3)
         self.yb.setFixedWidth(50)
-        self.yb.setText("0")
+        self.yb.setPlaceholderText("0")
         self.yb.move(475, 660)
         
         self.lbl_bl = QtWidgets.QLabel(self)
@@ -181,7 +183,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.bl = QtWidgets.QLineEdit(self)
         self.bl.setMaxLength(3)
         self.bl.setFixedWidth(50)
-        self.bl.setText("0")
+        self.bl.setPlaceholderText("0")
         self.bl.move(1000, 380)
         
         self.lbl_br = QtWidgets.QLabel(self)
@@ -190,7 +192,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.br = QtWidgets.QLineEdit(self)
         self.br.setMaxLength(3)
         self.br.setFixedWidth(50)
-        self.br.setText("0")
+        self.br.setPlaceholderText("0")
         self.br.move(1660, 380)
         
         self.lbl_bt = QtWidgets.QLabel(self)
@@ -199,7 +201,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.bt = QtWidgets.QLineEdit(self)
         self.bt.setMaxLength(3)
         self.bt.setFixedWidth(50)
-        self.bt.setText("0")
+        self.bt.setPlaceholderText("0")
         self.bt.move(1325, 100)
         
         self.lbl_bb = QtWidgets.QLabel(self)
@@ -208,7 +210,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.bb = QtWidgets.QLineEdit(self)
         self.bb.setMaxLength(3)
         self.bb.setFixedWidth(50)
-        self.bb.setText("0")
+        self.bb.setPlaceholderText("0")
         self.bb.move(1325, 660)
         
         self.lbl_bz = QtWidgets.QLabel(self)
@@ -217,7 +219,7 @@ class heartSegmTab(QtWidgets.QWidget):
         self.bz = QtWidgets.QLineEdit(self)
         self.bz.setMaxLength(3)
         self.bz.setFixedWidth(50)
-        self.bz.setText("0")
+        self.bz.setPlaceholderText("0")
         self.bz.move(1660, 580)
         
         # First slice picture
@@ -288,7 +290,8 @@ class bonesSegmTab(QtWidgets.QWidget):
         self.lt = QtWidgets.QLineEdit(self)
         self.lt.setMaxLength(3)
         self.lt.setFixedWidth(50)
-        self.lt.setText("0")
+        # self.lt.setText("0")
+        self.lt.setPlaceholderText("0")
         self.lt.move(300, 300)
         
         # Upper threshold
@@ -341,7 +344,7 @@ class liverSegmTab(QtWidgets.QWidget):
         self.lt = QtWidgets.QLineEdit(self)
         self.lt.setMaxLength(3)
         self.lt.setFixedWidth(50)
-        self.lt.setText("0")
+        self.lt.setPlaceholderText("0")
         self.lt.move(300, 300)
         
         # Upper threshold
@@ -351,7 +354,7 @@ class liverSegmTab(QtWidgets.QWidget):
         self.ut = QtWidgets.QLineEdit(self)
         self.ut.setMaxLength(3)
         self.ut.setFixedWidth(50)
-        self.ut.setText("0")
+        self.ut.setPlaceholderText("0")
         self.ut.move(1300, 300)
         
         # Histogram picture
@@ -396,7 +399,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.xl = QtWidgets.QLineEdit(self)
         self.xl.setMaxLength(3)
         self.xl.setFixedWidth(50)
-        self.xl.setText("0")
+        self.xl.setPlaceholderText("0")
         self.xl.move(135, 160)
         
         self.lbl_xr = QtWidgets.QLabel(self)
@@ -405,7 +408,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.xr = QtWidgets.QLineEdit(self)
         self.xr.setMaxLength(3)
         self.xr.setFixedWidth(50)
-        self.xr.setText("0")
+        self.xr.setPlaceholderText("0")
         self.xr.move(365, 160)
         
         self.lbl_yt = QtWidgets.QLabel(self)
@@ -414,7 +417,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.yt = QtWidgets.QLineEdit(self)
         self.yt.setMaxLength(3)
         self.yt.setFixedWidth(50)
-        self.yt.setText("0")
+        self.yt.setPlaceholderText("0")
         self.yt.move(250, 60)
         
         self.lbl_yb = QtWidgets.QLabel(self)
@@ -423,7 +426,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.yb = QtWidgets.QLineEdit(self)
         self.yb.setMaxLength(3)
         self.yb.setFixedWidth(50)
-        self.yb.setText("0")
+        self.yb.setPlaceholderText("0")
         self.yb.move(250, 260)
         
         self.lbl_zt = QtWidgets.QLabel(self)
@@ -432,7 +435,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.zt = QtWidgets.QLineEdit(self)
         self.zt.setMaxLength(3)
         self.zt.setFixedWidth(50)
-        self.zt.setText("0")
+        self.zt.setPlaceholderText("0")
         self.zt.move(480, 60)
         
         self.lbl_zb = QtWidgets.QLabel(self)
@@ -441,7 +444,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.zb = QtWidgets.QLineEdit(self)
         self.zb.setMaxLength(3)
         self.zb.setFixedWidth(50)
-        self.zb.setText("0")
+        self.zb.setPlaceholderText("0")
         self.zb.move(480, 260)
         
         # Lower threshold
@@ -451,7 +454,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.lt = QtWidgets.QLineEdit(self)
         self.lt.setMaxLength(3)
         self.lt.setFixedWidth(50)
-        self.lt.setText("0")
+        self.lt.setPlaceholderText("0")
         self.lt.move(60, 650)
         
         # Upper threshold
@@ -461,7 +464,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.ut = QtWidgets.QLineEdit(self)
         self.ut.setMaxLength(3)
         self.ut.setFixedWidth(50)
-        self.ut.setText("0")
+        self.ut.setPlaceholderText("0")
         self.ut.move(710, 650)
         
         # Left kidney (right on pictures)
@@ -476,7 +479,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.xl2 = QtWidgets.QLineEdit(self)
         self.xl2.setMaxLength(3)
         self.xl2.setFixedWidth(50)
-        self.xl2.setText("0")
+        self.xl2.setPlaceholderText("0")
         self.xl2.move(1285, 160)
         
         self.lbl_xr2 = QtWidgets.QLabel(self)
@@ -485,7 +488,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.xr2 = QtWidgets.QLineEdit(self)
         self.xr2.setMaxLength(3)
         self.xr2.setFixedWidth(50)
-        self.xr2.setText("0")
+        self.xr2.setPlaceholderText("0")
         self.xr2.move(1515, 160)
         
         self.lbl_yt2 = QtWidgets.QLabel(self)
@@ -494,7 +497,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.yt2 = QtWidgets.QLineEdit(self)
         self.yt2.setMaxLength(3)
         self.yt2.setFixedWidth(50)
-        self.yt2.setText("0")
+        self.yt2.setPlaceholderText("0")
         self.yt2.move(1405, 60)
         
         self.lbl_yb2 = QtWidgets.QLabel(self)
@@ -503,7 +506,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.yb2 = QtWidgets.QLineEdit(self)
         self.yb2.setMaxLength(3)
         self.yb2.setFixedWidth(50)
-        self.yb2.setText("0")
+        self.yb2.setPlaceholderText("0")
         self.yb2.move(1400, 260)
         
         self.lbl_zt2 = QtWidgets.QLabel(self)
@@ -512,7 +515,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.zt2 = QtWidgets.QLineEdit(self)
         self.zt2.setMaxLength(3)
         self.zt2.setFixedWidth(50)
-        self.zt2.setText("0")
+        self.zt2.setPlaceholderText("0")
         self.zt2.move(1630, 60)
         
         self.lbl_zb2 = QtWidgets.QLabel(self)
@@ -521,7 +524,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.zb2 = QtWidgets.QLineEdit(self) 
         self.zb2.setMaxLength(3)
         self.zb2.setFixedWidth(50)
-        self.zb2.setText("0")
+        self.zb2.setPlaceholderText("0")
         self.zb2.move(1630, 260)
         
         # Lower threshold
@@ -531,7 +534,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.lt2 = QtWidgets.QLineEdit(self)
         self.lt2.setMaxLength(3)
         self.lt2.setFixedWidth(50)
-        self.lt2.setText("0")
+        self.lt2.setPlaceholderText("0")
         self.lt2.move(1150, 650)
         
         # Upper threshold
@@ -541,7 +544,7 @@ class kidneysSegmTab(QtWidgets.QWidget):
         self.ut2 = QtWidgets.QLineEdit(self)
         self.ut2.setMaxLength(3)
         self.ut2.setFixedWidth(50)
-        self.ut2.setText("0")
+        self.ut2.setPlaceholderText("0")
         self.ut2.move(1800, 650)
         
         # self.lbl = QtWidgets.QLabel(self)
@@ -784,9 +787,7 @@ class segmWindow(QtWidgets.QMainWindow):
             popup_message(self, "Parameters must be integers!")
        
     def start_liver_segm(self):
-        print("1")
         self.ToolTab = liverSegmTab(self)
-        print("2")
         self.setWindowTitle("Segmentation: Liver and spleen")
         self.setCentralWidget(self.ToolTab)
         
@@ -1034,16 +1035,17 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         
         MainWindow.setCentralWidget(self.centralwidget)
         
-        # button_action = QtWidgets.QAction(QtGui.QIcon("icon.png"), "&Your button", self)
         button_action = QtWidgets.QAction("&Open project on GitHub", self)
         button_action.setStatusTip("Enter GitHub page of the program")
         button_action.triggered.connect(self.open_url)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 500, 800, 21))
-        self.menubar.setObjectName("menubar")
-        self.filemenu = self.menubar.addMenu("&GitHub")
-        self.filemenu.addAction(button_action)
-        MainWindow.setMenuBar(self.menubar)
+        # button_action.setIcon(QtGui.QIcon(""))
+        self.menuBar = QtWidgets.QMenuBar(MainWindow)
+        self.menuBar.setGeometry(QtCore.QRect(0, 500, 800, 21))
+        self.menuBar.setObjectName("menubar")
+        self.gitMenu = self.menuBar.addMenu("&GitHub")
+        self.gitMenu.addAction(button_action)
+        self.menuBar.setStyleSheet('QMenuBar {border-top: transparent; color: #35322f;}')
+        MainWindow.setMenuBar(self.menuBar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

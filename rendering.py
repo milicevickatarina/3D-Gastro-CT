@@ -45,9 +45,9 @@ def main(fileName):
     renderer.SetBackground(colors.GetColor3d("white"))
 
     renderWindow.SetSize(800, 800)
+    renderWindow.GlobalWarningDisplayOff()
     renderWindow.Render()
     renderWindow.SetWindowName('Rendered Data')
-    renderWindow.GlobalWarningDisplayOff()
 
     renderWindowInteractor.Start()
 
